@@ -1,6 +1,4 @@
-# SystemC Makefile для macOS с Homebrew
 
-# Автоматическое определение пути через Homebrew
 SYSTEMC_HOME ?= $(shell brew --prefix systemc)
 SYSTEMC_LIB ?= $(SYSTEMC_HOME)/lib
 
