@@ -1,0 +1,10 @@
+build/
+*.o
+sim
+
+*.vcd
+*.log
+
+.DS_Store
+*.swp
+*.swo
