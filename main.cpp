@@ -36,7 +36,7 @@ int sc_main(int, char*[]) {
         term.hash[i](hash[i]);
     term.load_conditions("inputs/terminator.txt");
 
-    sc_trace_file* tf = sc_create_vcd_trace_file("wave");
+    sc_trace_file* tf = sc_create_vcd_trace_file("./outputs/wave");
     sc_trace(tf, clk, "clk");
     sc_trace(tf, din, "din");
     sc_trace(tf, start, "start");
