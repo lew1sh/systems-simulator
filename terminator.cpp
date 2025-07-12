@@ -28,7 +28,6 @@ void Terminator::load_conditions(const string& filename) {
             if (regex_match(line, m, regex(R"(def\s+(\w+)\s*\(\s*(.*?)\s*\))"))) {
                 func_name = m[1];
                 string args_str = m[2];
-                // Исправленный парсинг аргументов
                 regex arg_regex(R"(\w+)");
                 sregex_iterator iter(args_str.begin(), args_str.end(), arg_regex);
                 sregex_iterator end;

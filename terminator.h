@@ -16,7 +16,6 @@ public:
     sc_in<int> hash[5];
     sc_in<int> start, din, com_reg; 
     
-    // Флаг для отслеживания срабатывания
     bool triggered = false;
     sc_time trigger_time;
 
@@ -37,4 +36,4 @@ private:
     bool evaluate_single_condition(const string& condition, const unordered_map<string, int>& ctx);
 };
 
-#endif // TERMINATOR_H 
+#endif 

@@ -36,7 +36,6 @@ int sc_main(int, char*[]) {
         term.hash[i](hash[i]);
     term.load_conditions("inputs/terminator.txt");
 
-    // Tracing
     sc_trace_file* tf = sc_create_vcd_trace_file("wave");
     sc_trace(tf, clk, "clk");
     sc_trace(tf, din, "din");
@@ -49,7 +48,6 @@ int sc_main(int, char*[]) {
 
     cout << "Starting simulation..." << endl;
     
-    // Простая симуляция без верификатора
     while(true) {
         sc_start(1, SC_NS);
         
@@ -58,21 +56,20 @@ int sc_main(int, char*[]) {
             break; 
         }
         
-        // Проверяем таймаут
         if(sc_time_stamp().to_default_time_units() >= 100) { 
             cout << "Timeout" << endl; 
             break; 
         }
     }
 
-    // Проверяем причину остановки симуляции
+   
     if (sc_end_of_simulation_invoked()) {
         cout << "Simulation was stopped by Terminator or sc_stop()" << endl;
     } else {
         cout << "Simulation ended normally" << endl;
     }
     
-    // Проверяем, сработал ли Terminator
+    
     if (term.triggered) {
         cout << "Terminator triggered at " << term.trigger_time << endl;
     } else {
