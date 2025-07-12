@@ -1,28 +1,37 @@
-
-SYSTEMC_HOME ?= $(shell brew --prefix systemc)
-SYSTEMC_LIB ?= $(SYSTEMC_HOME)/lib
+SYSTEMC_HOME = /usr/local/systemc
 
 CXX = g++
 CXXFLAGS = -std=c++17 -I$(SYSTEMC_HOME)/include
-LDFLAGS = -L$(SYSTEMC_LIB) -Wl,-rpath,$(SYSTEMC_LIB)
-LIBS = -lsystemc -lm
+LDFLAGS = -L$(SYSTEMC_HOME)/lib -Wl,-rpath,$(SYSTEMC_HOME)/lib -lsystemc -lm
 
-SRCS = $(wildcard main3newfail.cpp)
-OBJS = $(SRCS:.cpp=.o)
-TARGET = sim
+# Исходные файлы
+SOURCES = main.cpp scenario_loader.cpp source.cpp terminator.cpp
+OBJECTS = $(SOURCES:.cpp=.o)
 
-all: $(TARGET)
+# Основные цели
+all: simulator
 
-$(TARGET): $(OBJS)
-	$(CXX) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
+# Основная программа
+simulator: $(OBJECTS)
+	$(CXX) -o $@ $(OBJECTS) $(LDFLAGS)
 
+# Компиляция объектных файлов
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+test_terminator: test_terminator.cpp
+	$(CXX) $(CXXFLAGS) -o test_terminator test_terminator.cpp $(LDFLAGS)
+
+# Запуск тестов
+test: test_terminator
+	./test_terminator
+
+
+run: simulator
+	./simulator
+
+# Очистка
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f *.o simulator test_terminator *.vcd
 
-run: $(TARGET)
-	DYLD_LIBRARY_PATH=$(SYSTEMC_LIB) ./$(TARGET)
-
-.PHONY: all clean run
+.PHONY: all test clean run

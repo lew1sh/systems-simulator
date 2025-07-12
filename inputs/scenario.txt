@@ -1,12 +1,5 @@
-1505  
-1 start 0  
-1 din 0  
-1 com_reg 0  
-14 start 1  
-14 din 0  
-14 com_reg 1  
-15 start 0  
-15 din 0  
-15 com_reg 0  
-17 start 0  
-17 din 0x616161616161616160
+1 start 1     
+2 din 42       
+3 com_reg 7    
+12 din 0 
+17 start 99

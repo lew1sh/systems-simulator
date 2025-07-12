@@ -1,0 +1,7 @@
+def stop_hash( hash_0 hash_1 hash_2 hash_3 hash_4 )
+    ( hash_0 == 0x80 ) & ( hash_1 == 0x95 ) &
+    ( hash_2 == 0x41 ) & ( hash_3 == 0x3C ) &
+    ( hash_4 == 0xFF )
+
+def stop( start )
+    ( start == 999 )
